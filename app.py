@@ -22,6 +22,7 @@ def predict():
         field_mapping = {
             'CycleWithPeakorNot': ('CycleWithPeakorNot', lambda x: 1 if x == '1' else 0, 0),
             'ReproductiveCategory': ('ReproductiveCategory', float, 1),
+            'EstimatedDayofOvulation': ('EstimatedDayofOvulation', float, 14),  # Now taken from user input
             'LengthofLutealPhase': ('LengthofLutealPhase', float, 14),
             'FirstDayofHigh': ('FirstDayofHigh', float, 10),
             'TotalNumberofHighDays': ('TotalNumberofHighDays', float, 5),
@@ -44,8 +45,7 @@ def predict():
             value = request.form.get(form_field)
             processed_data[field] = converter(value) if value is not None else default
         
-        # Calculate derived fields
-        processed_data['EstimatedDayofOvulation'] = 28 - processed_data['LengthofLutealPhase']
+        # Calculate derived fields (now using user-provided ovulation day)
         processed_data['TotalMensesScore'] = sum([
             processed_data['MensesScoreDayOne'],
             processed_data['MensesScoreDayTwo'],
@@ -89,13 +89,12 @@ def predict():
         prediction = model.predict([features])[0]
         
         return render_template('result.html',
-                            prediction=round(length_of_cycle, 2))
+                            prediction=round(prediction, 2))
     
     except Exception as e:
         error_message = f"An error occurred: {str(e)}"
         return render_template('error.html', error_message=error_message)
 
 if __name__ == '__main__':
-    # Create templates directory if it doesn't exist
     os.makedirs('templates', exist_ok=True)
     app.run(debug=True)

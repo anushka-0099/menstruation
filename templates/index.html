@@ -154,10 +154,11 @@
         <div class="form-group">
           <label for="LengthofLutealPhase">Typical luteal phase length (days)</label>
           <input type="number" id="LengthofLutealPhase" name="LengthofLutealPhase" 
-                 min="8" max="18" value="14">
+                 min="8" max="30" value="14">
           <div class="tooltip">Usually 10-16 days (time from ovulation to period)</div>
         </div>
       </div>
+      
       
       <!-- Fertility Tracking -->
       <div class="form-section">
@@ -176,6 +177,12 @@
             <input type="number" id="TotalNumberofHighDays" name="TotalNumberofHighDays" 
                    min="0" max="10" value="5">
           </div>
+          <div class="form-group">
+            <label for="EstimatedDayofOvulation">Estimated Day of Ovulation:</label>
+            <input type="number" id="EstimatedDayofOvulation" name="EstimatedDayofOvulation" 
+                   min="1" max="30" value="">
+            <div class="tooltip">Typically around day 14 for a 28-day cycle</div>
+        </div>
           
           <div class="form-group">
             <label for="TotalNumberofPeakDays">Peak fertility days</label>
