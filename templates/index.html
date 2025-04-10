@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Cycle Length Predictor</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #fdf2f8;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background-color: white;
+      padding: 30px 40px;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      max-width: 500px;
+      width: 100%;
+    }
+
+    h2 {
+      text-align: center;
+      color: #d63384;
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    input[type="number"] {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 20px;
+      background-color: #d63384;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #c22575;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Cycle Length Predictor</h2>
+    <form action="/predict" method="post">
+      <label>Cycle With Peak or Not (1/0):</label>
+      <input type="number" name="CycleWithPeakorNot">
+
+      <label>Reproductive Category (e.g. 1 = Teen):</label>
+      <input type="number" name="ReproductiveCategory">
+
+      <label>Length of Luteal Phase:</label>
+      <input type="number" name="LengthofLutealPhase">
+
+      <label>First Day of High:</label>
+      <input type="number" name="FirstDayofHigh">
+
+      <label>Total Number of High Days:</label>
+      <input type="number" name="TotalNumberofHighDays">
+
+      <label>Total High Post Peak:</label>
+      <input type="number" name="TotalHighPostPeak">
+
+      <label>Total Number of Peak Days:</label>
+      <input type="number" name="TotalNumberofPeakDays">
+
+      <label>Length of Menses:</label>
+      <input type="number" name="LengthofMenses">
+
+      <label>Menses Score Day 1:</label>
+      <input type="number" name="MensesScoreDayOne">
+
+      <label>Menses Score Day 2:</label>
+      <input type="number" name="MensesScoreDayTwo">
+
+      <label>Menses Score Day 3:</label>
+      <input type="number" name="MensesScoreDayThree">
+
+      <label>Menses Score Day 4:</label>
+      <input type="number" name="MensesScoreDayFour">
+
+      <label>Menses Score Day 5:</label>
+      <input type="number" name="MensesScoreDayFive">
+
+      <label>Total Menses Score:</label>
+      <input type="number" name="TotalMensesScore">
+
+      <label>Number of Days of Intercourse:</label>
+      <input type="number" name="NumberofDaysofIntercourse">
+
+      <label>Intercourse In Fertile Window (1/0):</label>
+      <input type="number" name="IntercourseInFertileWindow">
+
+      <label>Unusual Bleeding (1/0):</label>
+      <input type="number" name="UnusualBleeding">
+
+      <button type="submit">Predict</button>
+    </form>
+  </div>
+</body>
+</html>
