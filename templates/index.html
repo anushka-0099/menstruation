@@ -2,124 +2,289 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Cycle Length Predictor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menstrual Cycle Length Predictor</title>
   <style>
+    :root {
+      --primary: #d63384;
+      --primary-hover: #c22575;
+      --secondary: #fdf2f8;
+      --text: #333;
+      --border: #e9c7db;
+    }
+    
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #fdf2f8;
+      background: var(--secondary);
       margin: 0;
-      padding: 0;
+      padding: 20px;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
+      min-height: 100vh;
+      color: var(--text);
     }
 
     .container {
       background-color: white;
-      padding: 30px 40px;
-      border-radius: 12px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-      max-width: 500px;
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      max-width: 600px;
       width: 100%;
     }
 
     h2 {
       text-align: center;
-      color: #d63384;
-      margin-bottom: 20px;
+      color: var(--primary);
+      margin-bottom: 25px;
+      font-size: 28px;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
     }
 
     label {
       display: block;
-      margin-top: 10px;
-      font-weight: bold;
-      color: #333;
+      margin-bottom: 6px;
+      font-weight: 600;
+      color: var(--text);
     }
 
-    input[type="number"] {
+    .input-wrapper {
+      position: relative;
+    }
+
+    input[type="number"], select {
       width: 100%;
-      padding: 10px;
-      margin-top: 5px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
       box-sizing: border-box;
+      font-size: 16px;
+      transition: border-color 0.3s ease;
+    }
+
+    input[type="number"]:focus, select:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px rgba(214, 51, 132, 0.2);
+    }
+
+    .tooltip {
+      font-size: 12px;
+      color: #666;
+      margin-top: 4px;
+      font-style: italic;
     }
 
     button {
       width: 100%;
-      padding: 12px;
-      margin-top: 20px;
-      background-color: #d63384;
+      padding: 14px;
+      margin-top: 25px;
+      background-color: var(--primary);
       color: white;
       border: none;
       border-radius: 8px;
       font-size: 16px;
+      font-weight: 600;
       cursor: pointer;
-      transition: background-color 0.3s ease;
+      transition: all 0.3s ease;
     }
 
     button:hover {
-      background-color: #c22575;
+      background-color: var(--primary-hover);
+      transform: translateY(-1px);
+    }
+
+    .form-section {
+      margin-bottom: 20px;
+      padding-bottom: 15px;
+      border-bottom: 1px dashed var(--border);
+    }
+
+    .form-section h3 {
+      color: var(--primary);
+      margin-bottom: 15px;
+    }
+
+    .two-column {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+
+    @media (max-width: 600px) {
+      .two-column {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h2>Cycle Length Predictor</h2>
+    <h2>Menstrual Cycle Length Predictor</h2>
     <form action="/predict" method="post">
-      <label>Cycle With Peak or Not (1/0):</label>
-      <input type="number" name="CycleWithPeakorNot">
-
-      <label>Reproductive Category (e.g. 1 = Teen):</label>
-      <input type="number" name="ReproductiveCategory">
-
-      <label>Length of Luteal Phase:</label>
-      <input type="number" name="LengthofLutealPhase">
-
-      <label>First Day of High:</label>
-      <input type="number" name="FirstDayofHigh">
-
-      <label>Total Number of High Days:</label>
-      <input type="number" name="TotalNumberofHighDays">
-
-      <label>Total High Post Peak:</label>
-      <input type="number" name="TotalHighPostPeak">
-
-      <label>Total Number of Peak Days:</label>
-      <input type="number" name="TotalNumberofPeakDays">
-
-      <label>Length of Menses:</label>
-      <input type="number" name="LengthofMenses">
-
-      <label>Menses Score Day 1:</label>
-      <input type="number" name="MensesScoreDayOne">
-
-      <label>Menses Score Day 2:</label>
-      <input type="number" name="MensesScoreDayTwo">
-
-      <label>Menses Score Day 3:</label>
-      <input type="number" name="MensesScoreDayThree">
-
-      <label>Menses Score Day 4:</label>
-      <input type="number" name="MensesScoreDayFour">
-
-      <label>Menses Score Day 5:</label>
-      <input type="number" name="MensesScoreDayFive">
-
-      <label>Total Menses Score:</label>
-      <input type="number" name="TotalMensesScore">
-
-      <label>Number of Days of Intercourse:</label>
-      <input type="number" name="NumberofDaysofIntercourse">
-
-      <label>Intercourse In Fertile Window (1/0):</label>
-      <input type="number" name="IntercourseInFertileWindow">
-
-      <label>Unusual Bleeding (1/0):</label>
-      <input type="number" name="UnusualBleeding">
-
-      <button type="submit">Predict</button>
+      
+      <!-- Basic Cycle Information -->
+      <div class="form-section">
+        <h3>Cycle Basics</h3>
+        
+        <div class="form-group">
+          <label for="CycleWithPeakorNot">Did you detect an LH peak?</label>
+          <select id="CycleWithPeakorNot" name="CycleWithPeakorNot" required>
+            <option value="">Select...</option>
+            <option value="1">Yes</option>
+            <option value="0">No</option>
+          </select>
+          <div class="tooltip">Did your ovulation test show a positive result?</div>
+        </div>
+        
+        <div class="form-group">
+          <label for="ReproductiveCategory">Reproductive Stage</label>
+          <select id="ReproductiveCategory" name="ReproductiveCategory" required>
+            <option value="">Select your stage...</option>
+            <option value="1">Reproductive (regular cycles)</option>
+            <option value="2">Perimenopausal (irregular cycles)</option>
+            <option value="3">Postmenopausal</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="LengthofLutealPhase">Typical luteal phase length (days)</label>
+          <input type="number" id="LengthofLutealPhase" name="LengthofLutealPhase" 
+                 min="8" max="18" value="14">
+          <div class="tooltip">Usually 10-16 days (time from ovulation to period)</div>
+        </div>
+      </div>
+      
+      <!-- Fertility Tracking -->
+      <div class="form-section">
+        <h3>Fertility Signs</h3>
+        
+        <div class="form-group">
+          <label for="FirstDayofHigh">First day of fertile mucus</label>
+          <input type="number" id="FirstDayofHigh" name="FirstDayofHigh" 
+                 min="1" max="30" value="10">
+          <div class="tooltip">First day you noticed egg-white cervical mucus</div>
+        </div>
+        
+        <div class="two-column">
+          <div class="form-group">
+            <label for="TotalNumberofHighDays">High fertility days</label>
+            <input type="number" id="TotalNumberofHighDays" name="TotalNumberofHighDays" 
+                   min="0" max="10" value="5">
+          </div>
+          
+          <div class="form-group">
+            <label for="TotalNumberofPeakDays">Peak fertility days</label>
+            <input type="number" id="TotalNumberofPeakDays" name="TotalNumberofPeakDays" 
+                   min="0" max="3" value="1">
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="TotalHighPostPeak">High days after peak</label>
+          <input type="number" id="TotalHighPostPeak" name="TotalHighPostPeak" 
+                 min="0" max="5" value="2">
+        </div>
+      </div>
+      
+      <!-- Menstrual Information -->
+      <div class="form-section">
+        <h3>Period Details</h3>
+        
+        <div class="form-group">
+          <label for="LengthofMenses">Period duration (days)</label>
+          <input type="number" id="LengthofMenses" name="LengthofMenses" 
+                 min="1" max="10" value="5">
+        </div>
+        
+        <div class="two-column">
+          <div class="form-group">
+            <label for="MensesScoreDayOne">Day 1 flow</label>
+            <select id="MensesScoreDayOne" name="MensesScoreDayOne">
+              <option value="0">None</option>
+              <option value="1">Light</option>
+              <option value="2" selected>Moderate</option>
+              <option value="3">Heavy</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="MensesScoreDayTwo">Day 2 flow</label>
+            <select id="MensesScoreDayTwo" name="MensesScoreDayTwo">
+              <option value="0">None</option>
+              <option value="1">Light</option>
+              <option value="2" selected>Moderate</option>
+              <option value="3">Heavy</option>
+            </select>
+          </div>
+        </div>
+        
+        <div class="two-column">
+          <div class="form-group">
+            <label for="MensesScoreDayThree">Day 3 flow</label>
+            <select id="MensesScoreDayThree" name="MensesScoreDayThree">
+              <option value="0">None</option>
+              <option value="1" selected>Light</option>
+              <option value="2">Moderate</option>
+              <option value="3">Heavy</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="MensesScoreDayFour">Day 4 flow</label>
+            <select id="MensesScoreDayFour" name="MensesScoreDayFour">
+              <option value="0">None</option>
+              <option value="1" selected>Light</option>
+              <option value="2">Moderate</option>
+              <option value="3">Heavy</option>
+            </select>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="MensesScoreDayFive">Day 5 flow</label>
+          <select id="MensesScoreDayFive" name="MensesScoreDayFive">
+            <option value="0" selected>None</option>
+            <option value="1">Light</option>
+            <option value="2">Moderate</option>
+            <option value="3">Heavy</option>
+          </select>
+        </div>
+      </div>
+      
+      <!-- Additional Information -->
+      <div class="form-section">
+        <h3>Other Information</h3>
+        
+        <div class="form-group">
+          <label for="NumberofDaysofIntercourse">Days with intercourse</label>
+          <input type="number" id="NumberofDaysofIntercourse" name="NumberofDaysofIntercourse" 
+                 min="0" max="30" value="0">
+        </div>
+        
+        <div class="form-group">
+          <label for="IntercourseInFertileWindow">Intercourse in fertile window?</label>
+          <select id="IntercourseInFertileWindow" name="IntercourseInFertileWindow">
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="UnusualBleeding">Unusual bleeding?</label>
+          <select id="UnusualBleeding" name="UnusualBleeding">
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+          </select>
+          <div class="tooltip">Spotting, prolonged bleeding, etc.</div>
+        </div>
+      </div>
+      
+      <button type="submit">Predict Cycle Length</button>
     </form>
   </div>
 </body>

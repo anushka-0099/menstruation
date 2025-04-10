@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cycle Prediction Results</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #fdf2f8;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #333;
+        }
+        .result-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            max-width: 600px;
+            width: 100%;
+        }
+        h2 {
+            color: #d63384;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        .result-card {
+            background-color: #f8e1ed;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed #e9c7db;
+        }
+        .result-label {
+            font-weight: 600;
+        }
+        .result-value {
+            font-weight: bold;
+            color: #d63384;
+        }
+        .fertile-window {
+            background-color: #f0bcd4;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            margin-top: 25px;
+            font-weight: bold;
+        }
+        .back-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            margin-top: 25px;
+            background-color: #d63384;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+        }
+        .back-btn:hover {
+            background-color: #c22575;
+        }
+    </style>
+</head>
+<body>
+    <div class="result-container">
+        <h2>Your Cycle Prediction Results</h2>
+        
+        <div class="result-card">
+            <div class="result-item">
+                <span class="result-label">Predicted Cycle Length:</span>
+                <span class="result-value">{{ prediction }} days</span>
+            </div>
+            
+        
+        <a href="/" class="back-btn">Start New Prediction</a>
+    </div>
+</body>
+</html>
